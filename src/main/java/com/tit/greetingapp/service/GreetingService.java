@@ -39,7 +39,7 @@ public class GreetingService {
         return greeting;
     }
 
-    // UC4 - Retrieve a Greeting by ID
+    // UC5 - Retrieve a Greeting by ID
     public Greeting getGreetingById(Long id) {
         return greetings.get(id);
     }
