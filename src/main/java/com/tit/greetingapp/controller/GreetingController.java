@@ -45,6 +45,12 @@ public class GreetingController {
         return greetingService.getAllGreetings();
     }
 
+    // uc7
+    @PutMapping("/{id}")
+    public com.tit.greetingapp.model.Greeting updateGreeting(@PathVariable Long id, @RequestBody Greeting request) {
+        return greetingService.updateGreeting(id, request.getMessage());
+    }
+
 
     @GetMapping
     public Greeting getGreeting() {
