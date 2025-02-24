@@ -4,6 +4,8 @@ import com.tit.greetingapp.model.Greeting;
 import com.tit.greetingapp.repository.GreetingRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class GreetingService {
@@ -40,5 +42,9 @@ public class GreetingService {
     public Greeting getGreetingById(Long id) {
         return greetingRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Greeting not found for ID: " + id));
+    }
+
+    public List<Greeting> getAllGreetings() {
+        return greetingRepository.findAll(); // Fetches all greetings from DB
     }
 }
