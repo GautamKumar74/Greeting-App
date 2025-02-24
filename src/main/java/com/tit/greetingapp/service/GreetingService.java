@@ -47,4 +47,14 @@ public class GreetingService {
     public List<Greeting> getAllGreetings() {
         return greetingRepository.findAll(); // Fetches all greetings from DB
     }
+
+    // uc7
+    public Greeting updateGreeting(Long id, String newMessage) {
+        return greetingRepository.findById(id)
+                .map(existingGreeting -> {
+                    existingGreeting.setMessage(newMessage);
+                    return greetingRepository.save(existingGreeting);
+                })
+                .orElseThrow(() -> new RuntimeException("Greeting with ID " + id + " not found!"));
+    }
 }
