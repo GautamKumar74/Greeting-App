@@ -1,6 +1,12 @@
 package com.tit.greetingapp.model;
 
+import jakarta.persistence.*;
+
+@Entity // Marks this class as a JPA entity (table in DB)
+@Table(name = "greetings") // Optional: Specifies table name
 public class Greeting {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment ID
     private Long id;
     private String message;
 

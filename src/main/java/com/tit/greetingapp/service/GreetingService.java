@@ -1,18 +1,18 @@
 package com.tit.greetingapp.service;
 
 import com.tit.greetingapp.model.Greeting;
+import com.tit.greetingapp.repository.GreetingRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class GreetingService {
 
-    private final Map<Long, Greeting> greetings = new HashMap<>();
-    private final AtomicLong idCounter = new AtomicLong();
+    private final GreetingRepository greetingRepository;
 
+    public GreetingService(GreetingRepository greetingRepository) {
+        this.greetingRepository = greetingRepository;
+    }
     public String getGreetingMessage() {
         return "Hello World";
     }
@@ -31,16 +31,14 @@ public class GreetingService {
         }
     }
 
-    // UC4 - Save a Greeting message
     public Greeting saveGreeting(String message) {
-        long id = idCounter.incrementAndGet();
-        Greeting greeting = new Greeting(id, message);
-        greetings.put(id, greeting);
-        return greeting;
+        Greeting greeting = new Greeting(message); // Create a Greeting entity
+        return greetingRepository.save(greeting);  // Save to database
     }
 
     // UC5 - Retrieve a Greeting by ID
     public Greeting getGreetingById(Long id) {
-        return greetings.get(id);
+        return greetingRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Greeting not found for ID: " + id));
     }
 }
