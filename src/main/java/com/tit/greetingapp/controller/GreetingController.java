@@ -32,7 +32,6 @@ public class GreetingController {
         return greetingService.saveGreeting(request.getMessage()); // Save in DB
     }
 
-
     @GetMapping
     public Greeting getGreeting() {
         return new Greeting("Hello, this is a GET request!");
