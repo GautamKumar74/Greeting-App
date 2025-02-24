@@ -35,4 +35,10 @@ public class GreetingService {
         Greeting greeting = new Greeting(message); // Create a Greeting entity
         return greetingRepository.save(greeting);  // Save to database
     }
+
+    // UC5 - Retrieve a Greeting by ID
+    public Greeting getGreetingById(Long id) {
+        return greetingRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Greeting not found for ID: " + id));
+    }
 }
